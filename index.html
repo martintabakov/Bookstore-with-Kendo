@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Martin's Bookstore</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <link rel="shortcut icon" type="image/png" href="styles/images/favicon.ico"/>
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.mobile.min.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.all.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+</head>
+<script>
+    $(window).load(function() {
+    $(".se-pre-con").fadeOut("slow");;
+});
+</script>
+<div class="se-pre-con"></div>
+<body>
+    <div id="Popdiv">
+        <p id="popdivInner">Cart is empty.</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#Popdiv").kendoWindow({
+                title: "My Order",
+                actions: ["Close"],
+                width: "800px",
+                height: "500px",
+                visible: false,
+                draggable: false,
+                resizable: false,
+                modal: true
+            });
+        })
+
+
+        function popUp() {
+            var wnd = $("#Popdiv").data("kendoWindow");
+            wnd.center();
+            wnd.open();
+            return true;
+
+        }
+
+    </script>
+<div id="wrapper">
+    <header class="header">
+        <a class="headingLink" href="index.html">
+            <h1><i class="fas fa-book-reader"></i> Martin's Book Store</h1>
+        </a>
+        <div class="cart-button">
+            <a id="cart-link" onclick="return popUp();">
+                <div class="cart-icon" style="margin-right: 1px;">
+                    <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>My Cart: $00.00</div>
+            </a>
+            <div class="cart-counter">
+                0 Items
+            </div>
+        </div>
+    </header>
+
+    <section id="books-wrapper">
+        <div id="BookStore">
+            <ul id="menu">
+                <li id="menu-all">
+                    All
+                </li>
+                <li id="menu-comic">
+                    Comic
+                </li>
+                <li id="menu-tech">
+                    Computers & Tech
+                </li>
+                <li id="menu-cooking">
+                    Cooking
+                </li>
+                <li id="menu-fantasy">
+                    Fantasy
+                </li>
+
+            </ul>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $("#menu").kendoMenu();
+            });
+        </script>
+        <div class="k-content">
+
+            <div class="demo-section k-content wide">
+                <div id="products"></div>
+            </div>
+
+            <script type="text/x-kendo-template" id="BookTemplate">
+             <div class="product" id= "product-#= BookID #">
+                <img src="images/#= BookID #.jpg" alt="#: BookName # #= BookID #" />
+                <h3>#:BookName# - #:BookAuthor#</h3>
+                <button id= "book-#= BookID #" class="add-to-cart"><i class="fas fa-plus"></i>  Add to cart</button>
+                <p>#:kendo.toString(BookPrice, "c")#</p>           
+            </div>
+        
+            </script>
+
+
+
+        </div>
+    </section>
+</div>
+</body>
+
+</html>
